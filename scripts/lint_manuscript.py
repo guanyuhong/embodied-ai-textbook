@@ -4,7 +4,7 @@
 职责：
   1. Blocker（致命，退出码 1）：营销绝对化表述、平台绑定表述。
   2. Warning（提示，默认不致命）：RaysTwins 技术细节断言、缺少"需平台方补充"标注、
-     RaysTwins 教学辅助案例篇幅超限。
+     RaysTwins 教学辅助案例篇幅超限、配图图号/路径/图注格式问题。
   3. 章节结构：仅对 manuscript/chapters/*.md 校验 12 项固定结构是否齐全、按序、非空壳。
 
 设计取舍：
@@ -69,6 +69,14 @@ WARNING_TECH_ASSERTION = re.compile(
 )
 # 形似具体命令调用：raystwins 后接 ASCII 子命令/参数（避免把"RaysTwins 作为…"中文误判）。
 WARNING_COMMAND_LIKE = re.compile(r"raystwins\s+[a-z][a-z0-9_-]*", re.IGNORECASE)
+
+# ---- Warning：配图格式轻检查 ----
+IMAGE_RE = re.compile(r"!\[([^\]]*)\]\(([^)]+)\)")
+FIGURE_ALT_RE = re.compile(r"^图\s+(\d+)-(\d+)\s+\S")
+FIGURE_PATH_RE = re.compile(
+    r"(?:^|/|\.\./)figures/ch(\d{2})/fig(\d+)-(\d+)_[a-z0-9_]+\.(svg|png|jpg|jpeg|pdf)$",
+    re.IGNORECASE,
+)
 
 
 @dataclass
@@ -148,7 +156,79 @@ def check_words(path: str, lines: list[str], report: Report) -> None:
             path,
             0,
             "本文件涉及 RaysTwins 技术细节，但全文未出现'需平台方补充'标注。",
-        )
+            )
+
+
+def check_figures(path: str, lines: list[str], report: Report) -> None:
+    in_code_fence = False
+    for idx, line in enumerate(lines, start=1):
+        if line.strip().startswith("```"):
+            in_code_fence = not in_code_fence
+            continue
+        if in_code_fence:
+            continue
+
+        for match in IMAGE_RE.finditer(line):
+            alt = match.group(1).strip()
+            image_path = match.group(2).strip()
+            is_local_figure = "figures/" in image_path or "figures\\" in image_path
+            looks_numbered = alt.startswith("图 ")
+            if not (is_local_figure or looks_numbered):
+                continue
+
+            alt_match = FIGURE_ALT_RE.match(alt)
+            if not alt_match:
+                report.add(
+                    "warning",
+                    path,
+                    idx,
+                    "配图 alt 文本应以'图 X-Y 图题'开头。",
+                )
+                continue
+
+            fig_chapter = int(alt_match.group(1))
+            fig_index = int(alt_match.group(2))
+
+            path_match = FIGURE_PATH_RE.search(image_path)
+            if not path_match:
+                report.add(
+                    "warning",
+                    path,
+                    idx,
+                    "配图路径应符合 figures/chXX/figX-Y_name.svg|png|jpg|jpeg|pdf。",
+                )
+            else:
+                path_ch_dir = int(path_match.group(1))
+                path_fig_chapter = int(path_match.group(2))
+                path_fig_index = int(path_match.group(3))
+                if (path_ch_dir, path_fig_chapter, path_fig_index) != (
+                    fig_chapter,
+                    fig_chapter,
+                    fig_index,
+                ):
+                    report.add(
+                        "warning",
+                        path,
+                        idx,
+                        "配图 alt 图号与文件路径章节/序号不一致。",
+                    )
+
+            caption = _next_non_empty_line(lines, idx)
+            if caption is None or not caption.startswith(f"图 {fig_chapter}-{fig_index} "):
+                report.add(
+                    "warning",
+                    path,
+                    idx,
+                    "配图后应紧跟以相同图号开头的图注。",
+                )
+
+
+def _next_non_empty_line(lines: list[str], current_line_no: int) -> str | None:
+    for line in lines[current_line_no:]:
+        stripped = line.strip()
+        if stripped:
+            return stripped
+    return None
 
 
 HEADING_RE = re.compile(r"^(#{1,6})\s+(.*\S)\s*$")
@@ -249,6 +329,7 @@ def main(argv: list[str]) -> int:
     for path in all_files:
         lines = read_lines(path)
         check_words(path, lines, report)
+        check_figures(path, lines, report)
 
     chapter_files = iter_markdown_files([args.chapters_dir])
     if not chapter_files:

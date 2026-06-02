@@ -55,9 +55,12 @@ Writer Codex 写作前必须读取：
 3. `metadata/terminology.yaml`
 4. `manuscript/book_outline.md`
 5. `manuscript/chapter_template.md`
-6. `references/sources.yaml`（引用白名单，拓展阅读须出自此处）
-7. `planning/STATUS.md`（确认任务状态与阻塞）
-8. 与当前任务相关的参考资料
+6. `standards/figure_standard.md`
+7. `standards/style_guide.md`
+8. `standards/content_standard.md`
+9. `references/sources.yaml`（引用白名单，拓展阅读须出自此处）
+10. `planning/STATUS.md`（确认任务状态与阻塞）
+11. 与当前任务相关的参考资料
 
 Writer Codex 写作约束：
 
@@ -67,6 +70,7 @@ Writer Codex 写作约束：
 - 涉及缺失资料时标注“需平台方补充”。
 - 修改后运行 `scripts/check_manuscript.sh`（设 `LINT_STRICT=1` 可将 warning 视为失败）。
 - 在章节文件末尾追加 `writer-selfcheck` HTML 注释（自检清单 + 需平台方补充 + 需人工确认 + 引用来源 id）。
+- 在自检中列出配图规划、教材化组件和内容边界确认。
 - 完成后更新 `planning/STATUS.md` 对应行。
 - 基础实验优先复用 `labs/common`（纯 Python、零依赖）的任务包/Runner/回放/指标框架。
 
@@ -87,8 +91,11 @@ Auditor Codex 审计前必须读取：
 3. `metadata/course_spec.yaml`
 4. `metadata/terminology.yaml`
 5. `manuscript/book_outline.md`
-6. `references/sources.yaml`（核对引用是否在白名单且 verified）
-7. 当前分支相对于 `main` 或 `origin/main` 的 diff
+6. `standards/figure_standard.md`
+7. `standards/style_guide.md`
+8. `standards/content_standard.md`
+9. `references/sources.yaml`（核对引用是否在白名单且 verified）
+10. 当前分支相对于 `main` 或 `origin/main` 的 diff
 
 Auditor Codex 输出（报告须以机读 YAML front-matter 开头，含 `verdict: pass|fix|block`）：
 
@@ -98,6 +105,7 @@ Auditor Codex 输出（报告须以机读 YAML front-matter 开头，含 `verdic
 - RaysTwins 边界检查。
 - 高校教材适配检查。
 - 实验可执行性检查。
+- 配图规划、定义框、例子框、概念辨析框和章节内容边界检查。
 - 需平台方补充资料。
 - 给 Writer Codex 的修改 Prompt。
 - 合并建议：可以合并 / 修改后合并 / 不建议合并。
@@ -173,6 +181,14 @@ scripts/audit_current_branch.sh
 确定性检查（`scripts/check_manuscript.sh`）已通过 `.github/workflows/manuscript-check.yml`
 在 PR/push 上自动运行，无需密钥与费用，可直接作为合并前的第一道闸门。
 
+项目提供可安装 Skill 源文件：
+
+```bash
+scripts/install_project_skill.sh
+```
+
+安装后，后续章节写作、教材化润色、审计和配图规划任务应触发
+`embodied-ai-textbook-editorial` skill，并继续以仓库内 `standards/` 文件为规范源。
+
 第三阶段再考虑 GitHub Actions 跑 Codex 自动审计。该步骤涉及密钥、费用、权限和输出稳定性，
 建议在本地审计流程稳定后再做。
-
