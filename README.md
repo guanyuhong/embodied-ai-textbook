@@ -17,3 +17,14 @@ RaysTwins 作为教学辅助仿真平台之一，用于支撑部分实验和项�
 - `prompts/`：Codex 写作提示词
 - `references/`：参考资料
 - `outputs/`：Codex 审查报告与临时输出
+
+## 协作流程
+
+本项目采用 Writer Codex、Auditor Codex、Human Editor 与 GitHub PR 分工协作。
+
+- Writer Codex 负责写作，允许在明确任务范围内修改正文。
+- Auditor Codex 默认只读，只输出审计报告，不直接修改正文。
+- Human Editor 决定是否采纳审计意见。
+- GitHub PR 作为最终合并闸门。
+
+详细流程见 `planning/codex_editorial_workflow.md`。

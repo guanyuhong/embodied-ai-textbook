@@ -1,0 +1,81 @@
+terms:
+  - id: embodied_ai
+    zh: 具身智能
+    en: Embodied AI
+    definition: "在身体、环境和任务约束中通过感知、规划、行动和反馈实现智能行为的人工智能形态。"
+    usage_note: "本教材将具身智能作为主线，强调通用理论与系统实践。"
+    avoid:
+      - "不要将具身智能简单等同于机器人硬件。"
+      - "不要将具身智能简单等同于大模型智能体。"
+
+  - id: embodied_agent
+    zh: 具身智能体
+    en: Embodied Agent
+    definition: "能够在环境中接收感知信息、形成任务决策并通过动作影响环境的智能体。"
+    usage_note: "可用于描述仿真机器人、真实机器人或虚拟环境中的具身任务执行主体。"
+
+  - id: perception_planning_action_feedback
+    zh: 感知-规划-行动-反馈闭环
+    en: Perception-Planning-Action-Feedback Loop
+    definition: "具身智能系统从环境获取信息、生成计划、执行动作并依据结果调整行为的基本闭环。"
+    usage_note: "各章涉及系统架构、导航、操作、学习和评估时应保持该闭环表述一致。"
+
+  - id: digital_twin
+    zh: 数字孪生
+    en: Digital Twin
+    definition: "对现实对象、环境、过程或系统进行数字化建模、仿真和状态映射的方法。"
+    usage_note: "在本教材中主要服务于具身智能实验、任务评测和系统验证。"
+
+  - id: simulation_platform
+    zh: 仿真平台
+    en: Simulation Platform
+    definition: "为机器人或具身智能任务提供物理、渲染、传感器、任务执行和评测环境的软件系统。"
+    usage_note: "讨论平台时应先讲平台类型与适用场景，再进行具体平台对照。"
+
+  - id: task_package
+    zh: 任务包
+    en: Task Package
+    definition: "用于描述具身智能实验任务的结构化材料，通常包括场景、主体、目标、约束、评价指标等内容。"
+    usage_note: "任务包概念可作为通用教学抽象。涉及 RaysTwins 官方 schema、字段或格式时，如资料缺失，标注“需平台方补充”。"
+
+  - id: replay_evaluation
+    zh: 回放评估
+    en: Replay and Evaluation
+    definition: "对智能体执行过程进行记录、回放、指标计算和结果分析的实验环节。"
+    usage_note: "用于支撑可复现实验、失败分析和课程项目答辩。"
+
+  - id: sim2real
+    zh: Sim2Real
+    en: Simulation to Reality
+    definition: "将在仿真环境中开发、训练或验证的策略和系统迁移到真实环境中的过程。"
+    usage_note: "需要强调物理参数、视觉分布、控制接口和安全边界等差异。"
+
+  - id: llm
+    zh: 大语言模型
+    en: Large Language Model
+    definition: "以自然语言为主要输入输出形式，能够进行语言理解、生成、推理和任务分解的模型。"
+    usage_note: "在具身智能系统中可作为任务规划、指令解析或工具调用模块，但不直接等同于低层运动控制器。"
+
+  - id: vlm
+    zh: 视觉语言模型
+    en: Vision-Language Model
+    definition: "联合处理视觉信息与语言信息的模型，可用于图像理解、视觉问答和场景语义分析。"
+    usage_note: "在教材中用于说明视觉理解如何支持具身任务规划。"
+
+  - id: vla
+    zh: 视觉-语言-动作模型
+    en: Vision-Language-Action Model
+    definition: "将视觉观测、语言指令与动作输出联系起来的模型范式。"
+    usage_note: "应作为概念和研究方向介绍，避免夸大其工程成熟度。"
+
+  - id: raystwins
+    zh: RaysTwins
+    en: RaysTwins
+    definition: "本教材中的教学辅助仿真平台之一，可用于支撑部分数字孪生仿真和课程实践环节。"
+    usage_note: "推荐表述为“RaysTwins 可作为教学辅助仿真平台”。不得写成唯一平台或产品培训主线。"
+    avoid:
+      - "本教材完全基于 RaysTwins。"
+      - "RaysTwins 替代所有主流仿真平台。"
+      - "RaysTwins 是唯一选择。"
+      - "RaysTwins 已支持某某 API，除非资料明确给出。"
+
