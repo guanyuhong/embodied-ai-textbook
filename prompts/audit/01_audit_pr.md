@@ -8,6 +8,9 @@
 - metadata/terminology.yaml
 - manuscript/book_outline.md
 - manuscript/chapter_template.md
+- standards/figure_standard.md
+- standards/style_guide.md
+- standards/content_standard.md
 - references/raystwins/README.md
 - 当前分支相对于 main 或 origin/main 的 diff
 - 当前工作区 staged / unstaged diff，如存在
@@ -30,7 +33,11 @@
 9. 实验是否具备环境、步骤、输入输出、结果记录和评分标准。
 10. 是否存在结构混乱、术语不统一、重复内容或逻辑跳跃。
 11. 是否需要平台方补充资料。
-12. 是否建议合并。
+12. 是否按 `standards/figure_standard.md` 给出配图规划或图位占位。
+13. 是否按 `standards/style_guide.md` 使用定义框、例子框、概念辨析框等教材化组件。
+14. 导论章是否存在过早展开平台细节、实验评分细节、SDK/API/schema/Runner 的问题。
+15. RaysTwins 内容是否压缩在教学辅助范围内。
+16. 是否建议合并。
 
 请不要修改正文。
 
@@ -91,6 +98,8 @@ verdict 三值必须与第 1 节结论、第 10 节合并建议一致。报告�
 - 思考题：
 - 实验任务：
 - 术语一致性：
+- 教材化组件：
+- 配图规划：
 
 ## 7. 实验可执行性检查
 
@@ -117,4 +126,3 @@ verdict 三值必须与第 1 节结论、第 10 节合并建议一致。报告�
 ## 10. 合并建议
 
 可以合并 / 修改后合并 / 不建议合并
-

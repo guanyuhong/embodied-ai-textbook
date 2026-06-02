@@ -17,6 +17,8 @@ RaysTwins 作为教学辅助仿真平台之一，用于支撑部分实验和项�
 - `prompts/`：Codex 写作提示词
 - `references/`：参考资料
 - `outputs/`：Codex 审查报告与临时输出
+- `standards/`：配图、文风与内容边界规范
+- `skills/`：项目内 Codex Skill 源文件
 
 ## 协作流程
 
@@ -28,6 +30,12 @@ RaysTwins 作为教学辅助仿真平台之一，用于支撑部分实验和项�
 - GitHub PR 作为最终合并闸门。
 
 详细流程见 `planning/codex_editorial_workflow.md`，全局进度与阻塞见 `planning/STATUS.md`。
+
+安装项目专用 Skill：
+
+```bash
+scripts/install_project_skill.sh
+```
 
 ## 工具与自动化
 
