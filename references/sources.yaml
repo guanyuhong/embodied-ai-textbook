@@ -1,0 +1,142 @@
+# 参考来源白名单
+#
+# 目的：约束 Writer Codex 只能引用可核验的公开来源，降低"编造论文/平台能力"的幻觉风险。
+#
+# 使用规则：
+#   1. 各章"拓展阅读"原则上只能引用本文件中的条目。
+#   2. 需要新增来源时，先在此登记，再在正文引用。
+#   3. 所有条目初始 verified: false，必须由 Human Editor 核对标题/作者/年份/链接后改为 true。
+#   4. verified: false 的条目可在草稿中临时引用，但合并前需完成核验。
+#   5. 涉及 RaysTwins 的技术细节不在本白名单中通过推断补全，统一标注"需平台方补充"。
+
+policy:
+  citation_required_from_whitelist: true
+  allow_unverified_in_draft: true
+  block_unverified_on_merge: true
+
+sources:
+  # ---- 基础教材类 ----
+  - id: sutton_barto_rl
+    type: book
+    title: "Reinforcement Learning: An Introduction (2nd ed.)"
+    authors: "Sutton, R. S.; Barto, A. G."
+    year: 2018
+    url: "http://incompleteideas.net/book/the-book.html"
+    topics: [reinforcement_learning]
+    use_for: [ch09, ch10]
+    verified: false
+
+  - id: lynch_park_modern_robotics
+    type: book
+    title: "Modern Robotics: Mechanics, Planning, and Control"
+    authors: "Lynch, K. M.; Park, F. C."
+    year: 2017
+    url: "https://hades.mech.northwestern.edu/index.php/Modern_Robotics"
+    topics: [kinematics, control]
+    use_for: [ch03]
+    verified: false
+
+  - id: thrun_probabilistic_robotics
+    type: book
+    title: "Probabilistic Robotics"
+    authors: "Thrun, S.; Burgard, W.; Fox, D."
+    year: 2005
+    url: "https://mitpress.mit.edu/9780262201629/probabilistic-robotics/"
+    topics: [slam, localization, navigation]
+    use_for: [ch05, ch06]
+    verified: false
+
+  # ---- 经典算法论文 ----
+  - id: hart_astar_1968
+    type: paper
+    title: "A Formal Basis for the Heuristic Determination of Minimum Cost Paths"
+    authors: "Hart, P. E.; Nilsson, N. J.; Raphael, B."
+    year: 1968
+    url: "https://ieeexplore.ieee.org/document/4082128"
+    topics: [path_planning, a_star]
+    use_for: [ch06]
+    verified: false
+
+  # ---- 仿真平台官方文档 ----
+  - id: ros2_docs
+    type: doc
+    title: "ROS 2 Documentation"
+    org: "Open Robotics"
+    url: "https://docs.ros.org/"
+    topics: [ros2, middleware]
+    use_for: [ch03, ch13]
+    verified: false
+
+  - id: mujoco_docs
+    type: doc
+    title: "MuJoCo Documentation"
+    org: "DeepMind"
+    url: "https://mujoco.readthedocs.io/"
+    topics: [simulation, physics]
+    use_for: [ch12, ch14]
+    verified: false
+
+  - id: pybullet_guide
+    type: doc
+    title: "PyBullet Quickstart Guide"
+    org: "Bullet Physics"
+    url: "https://pybullet.org/wordpress/"
+    topics: [simulation, physics]
+    use_for: [ch12, ch14]
+    verified: false
+
+  - id: isaac_sim_docs
+    type: doc
+    title: "NVIDIA Isaac Sim Documentation"
+    org: "NVIDIA"
+    url: "https://docs.isaacsim.omniverse.nvidia.com/"
+    topics: [simulation, gpu]
+    use_for: [ch12, ch14]
+    verified: false
+
+  - id: habitat_docs
+    type: doc
+    title: "Habitat Documentation"
+    org: "Meta AI / Facebook AI Research"
+    url: "https://aihabitat.org/"
+    topics: [simulation, navigation]
+    use_for: [ch12]
+    verified: false
+
+  - id: maniskill_docs
+    type: doc
+    title: "ManiSkill Documentation"
+    org: "UC San Diego (Hao Su Lab)"
+    url: "https://maniskill.readthedocs.io/"
+    topics: [simulation, manipulation]
+    use_for: [ch07, ch12]
+    verified: false
+
+  # ---- 综述与前沿（时效性强，需定期复核）----
+  - id: embodied_ai_survey
+    type: paper
+    title: "（待登记）具身智能综述"
+    note: "请填入一篇可核验的具身智能综述并核对作者/年份/链接。"
+    topics: [embodied_ai, survey]
+    use_for: [ch01]
+    verified: false
+
+  - id: vla_reference
+    type: paper
+    title: "（待登记）视觉-语言-动作模型代表性工作"
+    note: "VLA 领域更新很快，登记前请确认是发表/预印本且可核验。"
+    topics: [vla, foundation_model]
+    use_for: [ch11]
+    verified: false
+
+# 待补登记区：以下主题暂缺白名单来源，写作相关章节前需先补充
+gaps:
+  - topic: slam_tutorial
+    needed_for: [ch05, ch06]
+    note: "需登记 1-2 篇可核验的 SLAM/定位入门资料。"
+  - topic: imitation_learning
+    needed_for: [ch10]
+    note: "需登记行为克隆/模仿学习的可核验入门资料。"
+  - topic: sim2real
+    needed_for: [ch13]
+    note: "需登记域随机化/Sim2Real 的可核验综述或代表性论文。"
