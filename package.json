@@ -1,0 +1,12 @@
+{
+  "name": "embodied-ai-textbook",
+  "private": true,
+  "description": "Tooling for generating and auditing an embodied AI textbook (Mermaid export, lint).",
+  "devDependencies": {
+    "@mermaid-js/mermaid-cli": "^11.4.2"
+  },
+  "scripts": {
+    "export:mermaid": "bash scripts/export_mermaid_svg.sh"
+  }
+}
+

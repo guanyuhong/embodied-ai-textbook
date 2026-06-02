@@ -57,6 +57,37 @@ sources:
     use_for: [ch06]
     verified: false
 
+  # ---- 具身智能导论与思想来源（用于第 1 章）----
+  - id: turing_mind_1950
+    type: paper
+    title: "Computing Machinery and Intelligence"
+    authors: "Turing, A. M."
+    year: 1950
+    url: "https://academic.oup.com/mind/article/LIX/236/433/986238"
+    topics: [ai_history, intelligence]
+    use_for: [ch01]
+    verified: false
+
+  - id: brooks_iwr_1991
+    type: paper
+    title: "Intelligence without representation"
+    authors: "Brooks, R. A."
+    year: 1991
+    url: "https://ieeexplore.ieee.org/document/109005"
+    topics: [robotics, embodied_ai, behavior_based]
+    use_for: [ch01]
+    verified: false
+
+  - id: dourish_embodied_interaction_2001
+    type: book
+    title: "Where the Action Is: The Foundations of Embodied Interaction"
+    authors: "Dourish, P."
+    year: 2001
+    url: "https://mitpress.mit.edu/9780262541787/where-the-action-is/"
+    topics: [embodiment, hci, interaction]
+    use_for: [ch01]
+    verified: false
+
   # ---- 仿真平台官方文档 ----
   - id: ros2_docs
     type: doc

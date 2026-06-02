@@ -6,6 +6,12 @@ __pycache__/
 .venv/
 venv/
 
+# Node
+node_modules/
+
+# Editor
+.vscode/
+
 # 实验运行产物
 labs/**/outputs/
 outputs/**/*.json
