@@ -1,0 +1,31 @@
+course:
+  title: "具身智能导论：从数字孪生仿真到智能体实践"
+  audience:
+    - 人工智能
+    - 机器人工程
+    - 自动化
+    - 智能制造
+    - 数字孪生
+    - 计算机科学与技术
+  level: "本科高年级 / 应用型本科 / 微专业"
+  credits: 3
+  total_hours: 48
+  lecture_hours: 30
+  lab_hours: 12
+  project_hours: 4
+  presentation_hours: 2
+
+positioning:
+  main_focus: "具身智能通用理论与系统实践"
+  raystwins_role: "教学辅助仿真平台之一"
+  avoid:
+    - "产品宣传册"
+    - "平台操作手册"
+    - "单一平台绑定教材"
+
+assessment:
+  homework: 15
+  labs: 25
+  midterm_or_reading: 15
+  final_project: 35
+  presentation: 10
