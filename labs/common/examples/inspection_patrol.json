@@ -1,0 +1,23 @@
+{
+  "schema": "embodied-lab-task/v0",
+  "id": "inspection_patrol_demo",
+  "title": "工业巡检 Demo",
+  "description": "在带设备障碍的厂区栅格中从巡检起点到达指定检查点，用于对比随机基线与搜索算法。",
+  "world": {
+    "type": "gridworld",
+    "size": [12, 12],
+    "start": [0, 11],
+    "goal": [11, 0],
+    "obstacles": [
+      [3, 3], [3, 4], [3, 5], [3, 6], [3, 7], [3, 8],
+      [8, 2], [8, 3], [8, 4], [8, 5], [8, 6],
+      [5, 9], [6, 9], [7, 9]
+    ]
+  },
+  "agent": {
+    "type": "bfs",
+    "max_steps": 400
+  },
+  "metrics": ["success", "collisions", "path_length", "steps"],
+  "seed": 0
+}

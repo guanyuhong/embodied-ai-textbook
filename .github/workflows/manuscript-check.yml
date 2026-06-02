@@ -1,0 +1,34 @@
+name: manuscript-check
+
+# 第一阶段：纯确定性检查，无需任何密钥与外部服务。
+# Codex 审计（需密钥/费用）留待本地审计流程稳定后再接入。
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      strict:
+        description: "将 warning 视为失败"
+        required: false
+        default: "false"
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run manuscript checks
+        env:
+          # 手动触发且选择严格模式时，把 warning 也视为失败。
+          LINT_STRICT: ${{ github.event.inputs.strict == 'true' && '1' || '0' }}
+        run: bash scripts/check_manuscript.sh

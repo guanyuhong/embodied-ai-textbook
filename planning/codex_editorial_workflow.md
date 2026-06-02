@@ -55,7 +55,9 @@ Writer Codex 写作前必须读取：
 3. `metadata/terminology.yaml`
 4. `manuscript/book_outline.md`
 5. `manuscript/chapter_template.md`
-6. 与当前任务相关的参考资料
+6. `references/sources.yaml`（引用白名单，拓展阅读须出自此处）
+7. `planning/STATUS.md`（确认任务状态与阻塞）
+8. 与当前任务相关的参考资料
 
 Writer Codex 写作约束：
 
@@ -63,7 +65,10 @@ Writer Codex 写作约束：
 - 不得把教材写成 RaysTwins 产品宣传册或操作手册。
 - 不编造 RaysTwins SDK、API、任务包 schema、Runner 命令。
 - 涉及缺失资料时标注“需平台方补充”。
-- 修改后运行 `scripts/check_manuscript.sh`。
+- 修改后运行 `scripts/check_manuscript.sh`（设 `LINT_STRICT=1` 可将 warning 视为失败）。
+- 在章节文件末尾追加 `writer-selfcheck` HTML 注释（自检清单 + 需平台方补充 + 需人工确认 + 引用来源 id）。
+- 完成后更新 `planning/STATUS.md` 对应行。
+- 基础实验优先复用 `labs/common`（纯 Python、零依赖）的任务包/Runner/回放/指标框架。
 
 可使用提示词：
 
@@ -82,9 +87,10 @@ Auditor Codex 审计前必须读取：
 3. `metadata/course_spec.yaml`
 4. `metadata/terminology.yaml`
 5. `manuscript/book_outline.md`
-6. 当前分支相对于 `main` 或 `origin/main` 的 diff
+6. `references/sources.yaml`（核对引用是否在白名单且 verified）
+7. 当前分支相对于 `main` 或 `origin/main` 的 diff
 
-Auditor Codex 输出：
+Auditor Codex 输出（报告须以机读 YAML front-matter 开头，含 `verdict: pass|fix|block`）：
 
 - 总体结论。
 - 阻塞合并的问题。
@@ -109,6 +115,9 @@ scripts/audit_current_branch.sh
 - `outputs/audits/<branch>.worktree.patch`
 - `outputs/audits/<branch>_check.log`
 - `outputs/audits/<branch>_audit.md`
+
+并在末尾调用 `scripts/audit_verdict.py` 解析报告 front-matter，
+打印机读裁决（退出码 0=pass / 1=fix / 2=block / 3=缺少 front-matter）。
 
 ## 6. Human Editor 流程
 
@@ -161,5 +170,9 @@ scripts/audit_current_branch.sh
 
 第二阶段再考虑将审计报告贴到 PR 评论中。
 
-第三阶段再考虑 GitHub Actions 自动审计。自动审计涉及密钥、费用、权限和输出稳定性，建议在本地审计流程稳定后再做。
+确定性检查（`scripts/check_manuscript.sh`）已通过 `.github/workflows/manuscript-check.yml`
+在 PR/push 上自动运行，无需密钥与费用，可直接作为合并前的第一道闸门。
+
+第三阶段再考虑 GitHub Actions 跑 Codex 自动审计。该步骤涉及密钥、费用、权限和输出稳定性，
+建议在本地审计流程稳定后再做。
 

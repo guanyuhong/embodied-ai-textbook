@@ -4,55 +4,31 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 
+# 待检查的正文目标。结构检查只作用于 manuscript/chapters，词级检查作用于全部。
 CONTENT_TARGETS=(README.md manuscript/chapters labs teacher student)
 
-echo "== Checking prohibited marketing or platform-binding phrases =="
-if rg -n "全球领先|颠覆性|唯一选择|最强|完全基于 RaysTwins|替代所有主流仿真平台" "${CONTENT_TARGETS[@]}"; then
-  echo "Found prohibited or high-risk phrases above. Review required."
-  exit 1
-else
-  echo "OK"
+PYTHON_BIN="${PYTHON_BIN:-python3}"
+if ! command -v "$PYTHON_BIN" >/dev/null 2>&1; then
+  echo "未找到 $PYTHON_BIN，请安装 Python 3 后重试。" >&2
+  exit 2
 fi
 
-echo
-echo "== Checking RaysTwins technical-detail risk words =="
-if rg -n "RaysTwins.*(SDK|API|Runner|任务包|schema|命令)|RaysTwins 已支持|云端 Runner|本地/云端 Runner" "${CONTENT_TARGETS[@]}"; then
-  echo "Review the lines above. If a concrete RaysTwins SDK/API/schema/Runner detail is asserted, cite source or add: 需平台方补充."
-else
-  echo "OK"
+EXTRA_ARGS=()
+# 设置环境变量 LINT_STRICT=1 可将 warning 视为失败（用于 CI 严格闸门）。
+if [[ "${LINT_STRICT:-0}" == "1" ]]; then
+  EXTRA_ARGS+=(--strict)
 fi
 
-echo
-echo "== Checking chapter structure for existing chapter drafts =="
-shopt -s nullglob
-chapters=(manuscript/chapters/*.md)
-if (( ${#chapters[@]} == 0 )); then
-  echo "No chapter drafts found."
-else
-  required=(
-    "本章导读"
-    "学习目标"
-    "关键问题"
-    "核心概念"
-    "理论基础"
-    "方法与算法"
-    "平台与工具"
-    "RaysTwins 教学辅助案例"
-    "本章小结"
-    "思考题"
-    "实验任务"
-    "拓展阅读"
-  )
-  for chapter in "${chapters[@]}"; do
-    for heading in "${required[@]}"; do
-      if ! rg -q "$heading" "$chapter"; then
-        echo "Missing '$heading' in $chapter"
-        exit 1
-      fi
-    done
-  done
-  echo "OK"
-fi
+echo "== 运行教材稿件确定性检查 =="
+set +e
+"$PYTHON_BIN" scripts/lint_manuscript.py "${CONTENT_TARGETS[@]}" ${EXTRA_ARGS[@]+"${EXTRA_ARGS[@]}"}
+STATUS=$?
+set -e
 
 echo
-echo "All checks completed."
+if [[ "$STATUS" -eq 0 ]]; then
+  echo "检查通过。请仍人工检查 git diff。"
+else
+  echo "检查未通过（退出码 $STATUS）。请修复 Blocker 后重试。"
+fi
+exit "$STATUS"

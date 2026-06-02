@@ -34,7 +34,23 @@
 
 请不要修改正文。
 
-请输出 Markdown 审计报告，格式如下：
+请输出 Markdown 审计报告。报告**必须以 YAML front-matter 开头**（机器可读，供脚本/CI 解析裁决），
+随后是人类可读的报告正文。格式如下：
+
+```text
+---
+audit_target: <分支名或 PR 编号>
+verdict: pass            # pass=可以合并 / fix=修改后合并 / block=不建议合并
+blocking_issues: 0       # 阻塞问题数量
+suggested_issues: 0      # 建议修改问题数量
+raystwins_boundary_ok: true   # RaysTwins 边界是否守住
+structure_ok: true            # 12 项固定结构是否齐全
+needs_vendor_docs: false      # 是否存在需平台方补充的资料
+check_manuscript_passed: true # scripts/check_manuscript.sh 是否通过
+---
+```
+
+verdict 三值必须与第 1 节结论、第 10 节合并建议一致。报告正文格式如下：
 
 # 审计报告：PR / 分支名称
 

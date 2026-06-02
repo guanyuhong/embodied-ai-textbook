@@ -23,8 +23,17 @@ RaysTwins 作为教学辅助仿真平台之一，用于支撑部分实验和项�
 本项目采用 Writer Codex、Auditor Codex、Human Editor 与 GitHub PR 分工协作。
 
 - Writer Codex 负责写作，允许在明确任务范围内修改正文。
-- Auditor Codex 默认只读，只输出审计报告，不直接修改正文。
+- Auditor Codex 默认只读，只输出审计报告（以机读 `verdict` front-matter 开头），不直接修改正文。
 - Human Editor 决定是否采纳审计意见。
 - GitHub PR 作为最终合并闸门。
 
-详细流程见 `planning/codex_editorial_workflow.md`。
+详细流程见 `planning/codex_editorial_workflow.md`，全局进度与阻塞见 `planning/STATUS.md`。
+
+## 工具与自动化
+
+- `scripts/check_manuscript.sh`：确定性检查（违禁词 Blocker / RaysTwins 边界 Warning / 章节结构）。
+- `.github/workflows/manuscript-check.yml`：PR/push 上自动运行上述检查，无需密钥。
+- `scripts/audit_current_branch.sh` + `scripts/audit_verdict.py`：生成并解析 Codex 审计报告。
+- `references/sources.yaml`：参考来源白名单，约束引用、降低幻觉。
+- `labs/common/`：平台无关的纯 Python 教学实验框架（任务包→Runner→回放→指标），
+  普通机房零依赖即可跑通；RaysTwins 等真实平台作为可替换后端，细节需平台方补充。

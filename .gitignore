@@ -1,1 +1,15 @@
 .DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# 实验运行产物
+labs/**/outputs/
+outputs/**/*.json
+!outputs/audits/.gitkeep
+
+# 日志
+logs/*.log

@@ -34,7 +34,22 @@
 
 ## 输出格式
 
-请输出 Markdown 审计报告，包含：
+请输出 Markdown 审计报告。报告**必须以 YAML front-matter 开头**，供脚本/CI 解析裁决：
+
+```text
+---
+audit_target: <分支名或 PR 编号>
+verdict: pass | fix | block   # 可以合并 / 修改后合并 / 不建议合并
+blocking_issues: <整数>
+suggested_issues: <整数>
+raystwins_boundary_ok: true | false
+structure_ok: true | false
+needs_vendor_docs: true | false
+check_manuscript_passed: true | false
+---
+```
+
+front-matter 之后是人类可读正文，包含：
 
 1. 总体结论。
 2. 阻塞合并的问题。

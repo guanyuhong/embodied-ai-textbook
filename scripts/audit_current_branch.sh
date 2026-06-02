@@ -106,3 +106,11 @@ codex exec --sandbox "$SANDBOX" "$PROMPT" > "$REPORT_FILE"
 echo "Audit report generated:"
 echo "$REPORT_FILE"
 
+echo
+echo "Parsing machine-readable verdict..."
+set +e
+python3 scripts/audit_verdict.py "$REPORT_FILE"
+VERDICT_STATUS=$?
+set -e
+echo "verdict exit code: ${VERDICT_STATUS} (0=pass, 1=fix, 2=block, 3=缺少 front-matter)"
+

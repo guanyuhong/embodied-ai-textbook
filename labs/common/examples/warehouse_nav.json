@@ -1,0 +1,23 @@
+{
+  "schema": "embodied-lab-task/v0",
+  "id": "warehouse_nav_demo",
+  "title": "仓储导航 Demo",
+  "description": "在带货架障碍的仓库栅格中从入口导航到目标货位，用于演示导航与路径规划。",
+  "world": {
+    "type": "gridworld",
+    "size": [10, 8],
+    "start": [0, 0],
+    "goal": [9, 7],
+    "obstacles": [
+      [2, 1], [2, 2], [2, 3], [2, 4],
+      [5, 3], [5, 4], [5, 5], [5, 6],
+      [7, 0], [7, 1], [7, 2]
+    ]
+  },
+  "agent": {
+    "type": "astar",
+    "max_steps": 200
+  },
+  "metrics": ["success", "collisions", "path_length", "steps"],
+  "seed": 0
+}

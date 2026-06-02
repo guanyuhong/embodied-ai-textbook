@@ -23,6 +23,24 @@
 6. 涉及缺失的平台资料时，标注“需平台方补充”。
 7. 每章至少包含 3 个核心概念、3 道思考题和 1 个实验任务。
 8. 不大面积改写其他章节或规划文件。
+9. "拓展阅读"引用的来源必须来自 `references/sources.yaml`；不在白名单的来源先登记再引用。
+10. 在章节文件**末尾**追加一段写作自检（HTML 注释，不计入正文、不在成书中显示），
+    供 Auditor 复核，减少重复全查。格式如下：
+
+```text
+<!-- writer-selfcheck
+chapter: chXX
+template_sections_complete: true        # 12 项结构是否齐全
+raystwins_within_1_2_pages: true        # RaysTwins 案例是否控制在 1-2 页
+no_fabricated_platform_details: true    # 是否未编造 SDK/API/schema/Runner
+vendor_todo:                            # 本章"需平台方补充"清单
+  - <逐条列出>
+human_confirm:                          # 需人工确认的事实
+  - <逐条列出>
+sources_cited:                          # 引用来源 id，均来自 references/sources.yaml
+  - <id>
+-->
+```
 
 输出位置：
 
@@ -34,5 +52,5 @@
 scripts/check_manuscript.sh
 ```
 
-并在回复中说明修改了哪些文件，提醒人工检查 `git diff`。
+并在回复中说明修改了哪些文件，提醒人工检查 `git diff`。同时更新 `planning/STATUS.md` 中对应行的状态。
 
