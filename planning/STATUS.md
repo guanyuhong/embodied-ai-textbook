@@ -59,8 +59,21 @@
 - [ ] 补登模仿学习入门资料（gaps.imitation_learning）。
 - [ ] 补登 Sim2Real 综述（gaps.sim2real）。
 - [ ] 登记具身智能综述与 VLA 代表性工作（embodied_ai_survey / vla_reference）。
+- [ ] 核验 `caai_embodied_ai_whitepaper_2026`：确认《中国人工智能系列白皮书：具身智能（2026版）》的公开来源或授权状态。
 
-## 5. 教学配套进度
+## 5. 新增资料吸收待办
+
+| 来源 | 可补强章节 | 建议吸收方式 | 状态 |
+|---|---|---|---|
+| `caai_embodied_ai_whitepaper_2026` | ch01 | 拓展阅读中作为国内综述与行业趋势选读；不大改正文主体 | 待来源核验 |
+| `caai_embodied_ai_whitepaper_2026` | ch02 | 补“关键技术地图”：感知、推理、操作、导航、交互、强化学习、群体具身智能、世界模型、具身大模型、安全 | 待章节写作时吸收 |
+| `caai_embodied_ai_whitepaper_2026` | ch11 | 补“VLA -> WAM”前沿趋势，定位为选读/趋势，不写成成熟工程结论 | 待章节写作时吸收 |
+| `caai_embodied_ai_whitepaper_2026` | ch12 | 补数据集、模拟器、仿真平台开放化与标准化、数据飞轮、真实数据与仿真数据互补关系 | 待章节写作时吸收 |
+| `caai_embodied_ai_whitepaper_2026` | ch13 | 补虚实结合方法：域随机化、系统辨识、真实感仿真、人工实时干预、语言/世界模型辅助迁移 | 待章节写作时吸收 |
+| `caai_embodied_ai_whitepaper_2026` | ch08 / ch13 | 补具身智能安全：越狱、后门、幻觉、传感器攻击、对抗样本、安全控制 | 待章节写作时吸收 |
+| `caai_embodied_ai_whitepaper_2026` | ch15 | 作为项目选题池参考：生活服务、工业、农业、交通、能源与电力 | 待项目章写作时吸收 |
+
+## 6. 教学配套进度
 
 | 交付物 | 路径 | 状态 |
 |---|---|---|

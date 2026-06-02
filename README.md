@@ -11,6 +11,7 @@ RaysTwins 作为教学辅助仿真平台之一，用于支撑部分实验和项�
 ## 主要目录
 
 - `manuscript/`：教材正文
+- `docs/`：GitHub 浏览入口，链接到正文、规范和进度看板
 - `labs/`：实验指导书与代码
 - `teacher/`：教学大纲、课件大纲、评分标准
 - `student/`：学生项目模板
@@ -30,6 +31,9 @@ RaysTwins 作为教学辅助仿真平台之一，用于支撑部分实验和项�
 - GitHub PR 作为最终合并闸门。
 
 详细流程见 `planning/codex_editorial_workflow.md`，全局进度与阻塞见 `planning/STATUS.md`。
+
+在 GitHub 上直接浏览教材内容，可从 `docs/README.md` 进入；第 1 章正文位于
+`manuscript/chapters/ch01_intro.md`。
 
 安装项目专用 Skill：
 

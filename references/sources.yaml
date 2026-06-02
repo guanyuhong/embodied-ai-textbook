@@ -121,6 +121,17 @@ sources:
     use_for: [ch01]
     verified: false
 
+  - id: caai_embodied_ai_whitepaper_2026
+    type: report
+    title: "中国人工智能系列白皮书：具身智能（2026版）"
+    org: "中国人工智能学会"
+    year: 2026
+    file: "references/papers/H301_AP202604301821804488_1.pdf"
+    topics: [embodied_ai, survey, dataset, simulation, vla, world_model, safety, standardization]
+    use_for: [ch01, ch02, ch11, ch12, ch13, ch15, ch16]
+    note: "主编新增 PDF。合并前需由 Human Editor 核验公开来源或授权状态；引用时只作综述型参考，不直接搬运正文。"
+    verified: false
+
   - id: vla_reference
     type: paper
     title: "（待登记）视觉-语言-动作模型代表性工作"

@@ -1,0 +1,6 @@
+flowchart LR
+    Start["起点<br/>图书馆大厅"] --> Robot["导览机器人<br/>身体与传感器"]
+    Robot --> Corridor["走廊环境<br/>行人、障碍物、禁行区"]
+    Corridor --> Goal["目标<br/>人工智能实验室"]
+    Robot --> Feedback["反馈<br/>位置、碰撞、访客是否跟随"]
+    Feedback --> Robot
